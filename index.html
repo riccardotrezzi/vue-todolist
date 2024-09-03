@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Vue To Do list</title>
 
         <!--CSS-->
         <link rel="stylesheet" href="css/style.css">
@@ -19,15 +19,66 @@
     </head>
 
     <body>
-        
-        <!--MAIN-->
-        <main>
 
-        </main>
+        <div id="app">
+
+            <!--HEADER-->
+            <header>
+                <div class="container">
+                    <h1>
+                        To-Do List
+                    </h1>
+        
+                    <h4>
+                        Ci sono {{ todos.lenght }} task da svolgere
+                    </h4>
+                
+    
+                    <div>
+                        <h6>
+                            Scrivi una task: {{ newToDo }}
+                        </h6>
+
+                        <!--Prima tipologia per tasto aggiungi-->
+                        <form @submit.prevent="addToDO()">
+                            <input v-model="newToDo" type="text" required minlength="3"> <!-- il v-model serve per connettere la variabile che abbiamo in JS e l'input in HTML (è bidirezionale) -->
+                            <button type="submit">
+                                Aggiungi
+                            </button>
+                        </form>
+
+                        <!-- Seconda Tipologia di Tasto aggiungi
+                            <input @keyup.enter="addToDo()" v-model="newToDo" type="text"> 
+                            <button @click="addToDo()">
+                                Aggiungi
+                            </button>
+                        -->
+                    </div>
+                </div>
+            </header>
+
+            <!--MAIN-->
+
+            <main>
+                <div class="container">
+                    <ul>
+                        <li v-for="(todo, index) in todos" :class="todo.done == true ? 'done' : ''" > <!--Operatore ternario = :class="todo.done == true ? 'done' : ''"-->
+                            {{ todo.text }}
+                            <button @click="removeToDo(index)">
+                                X
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </main>
+            
+        </div>
+
 
 
         <!--LINK SCRIPT JS-->
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script type="text/javascript" src="js/vuescript.js"></script> 
         <script type="text/javascript" src="js/scripts.js"></script>
     </body>
 </html>
